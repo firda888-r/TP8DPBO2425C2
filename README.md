@@ -9,6 +9,34 @@ Sistem manajemen Jadwal Mengajar Dosen menggunakan arsitektur Model-View-Control
 
 Model ini tidak hanya melakukan operasi CRUD (Create, Read, Update, Delete) pada tabel Jadwal, tetapi juga memiliki relasi antar tabel dengan melakukan operasi JOIN pada tabel Dosen dan Mata_kuliah. Setelah Model mengembalikan data yang sudah lengkap, Controller meneruskannya ke View (views/jadwalView.php, MataKuliahView.php, JadwalView.php) Sementara itu, index.php bertindak sebagai Front Controller atau Router utama yang mengarahkan request ke Controller yang benar. View kemudian bertanggung jawab memvisualisasikan data dalam format yang mudah dipahami, seperti tabel interaktif yang menyajikan 'Nama Dosen' dan 'Nama Mata Kuliah' lengkap dengan opsi tombol Edit dan Hapus, yang memicu Controller untuk memanggil method spesifik (seperti delete atau edit form) berdasarkan parameter GET di URL.
 
+**DosenController.php**	Mengelola request CRUD untuk tabel Dosen.	
+index(): Menampilkan daftar semua Dosen.
+add(data)/store(): Memproses data POST dan menyimpannya.
+edit(id): Menampilkan form edit yang sudah terisi data Dosen berdasarkan ID.
+delete(id): Menghapus data Dosen berdasarkan ID.
+
+**MataKuliahController.php** Mengelola request CRUD untuk tabel Mata_kuliah.	
+create(): Menampilkan form tambah (mungkin perlu memuat daftar Dosen dari DosenModel untuk dropdown relasi).
+update(data): Memproses data POST dan memperbarui entri Mata Kuliah.
+
+**JadwalController.php** Mengelola request CRUD untuk tabel Jadwal.	
+index(): Menampilkan daftar jadwal bersama nama Dosen dan Mata Kuliah (memanggil Model dengan fungsi JOIN).
+destroy(id): Menghapus entri jadwal.
+
+**DosenModel.php**	Berinteraksi langsung dengan tabel Dosen. Menyediakan method dasar CRUD.	
+getAll(): Mengambil semua data Dosen.
+getById(id): Mengambil satu baris data Dosen.
+create(data): Menjalankan query INSERT.
+update(data): Menjalankan query UPDATE.
+
+**MataKuliahModel.php**	Berinteraksi dengan tabel Mata_kuliah.	
+getAll(): Mengambil semua Mata Kuliah.
+getAllWithDosenName(): Menggunakan JOIN dengan tabel Dosen untuk menampilkan nama dosen pengampu.
+
+**JadwalModel.php** Berinteraksi dengan tabel Jadwal. Model paling kompleks karena melibatkan dua relasi.	
+getAllWithRelations(): Melakukan JOIN dengan Dosen dan Mata_kuliah untuk mengambil detail jadwal lengkap.
+delete(id): Menjalankan query DELETE pada tabel Jadwal.
+
 
 ## Dokumentasi
 ID loncat ke 16 dikarenakan id sebelumnya sudah terdelete
