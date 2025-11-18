@@ -8,5 +8,6 @@ Saya Firda Ridzki Utami dengan Nim 2401626 mengerjakan TP 8 dalam Praktikum mata
 
 
 ## Dokumentasi
+ID loncat ke 16 dikarenakan id sebelumnya sudah terdelete
 https://github.com/user-attachments/assets/a2d6b7c0-252c-4c37-8842-99c43df5eb57
 
